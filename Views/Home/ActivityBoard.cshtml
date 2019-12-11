@@ -1,0 +1,84 @@
+@using System;
+<partial name="_NavPartial"/>
+
+<div class="container">
+    <main role="main" class="pb-3">
+        <h2>You Made it @ViewBag.user.Name</h2>
+        <h2>Activity Board</h2>
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-light">
+                <tr>
+                    <th>Activity</th>
+                    <th>Date and Time</th>
+                    <th>Duration</th>
+                    <th>Event Coordinator</th>
+                    <th># of Participants</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var act in ViewBag.allActivities)
+                {
+                    string duration = "";
+                    bool inActivity = false;
+                    foreach(var person in act.Attendees)
+                    {
+                        if (person.User.UserId == ViewBag.user.UserId)
+                        {
+                            inActivity = true;
+                        }
+                    }
+
+
+                    <tr>
+                        <td><a href="/activity/@act.ActivityId">@act.ActName</a></td>
+                        <td>@act.ActStart.ToString("M/d/yyyy") <span>&#64;</span> @act.ActStart.ToString("h:mm tt")</td>
+                        @{
+                            TimeSpan diff = act.ActEnd - act.ActStart;
+                            if(diff.Days > 0 && diff.Minutes == 0 && diff.Hours == 0){
+                                duration = $"{diff.Days} Days";
+                                <td>@duration</td>
+                            }
+                            else if (diff.Hours > 0 && diff.Days == 0 && diff.Minutes == 0) 
+                            {
+                                duration = $"{diff.Hours} Hours";
+                                <td>@duration</td>
+                            }
+                            else if (diff.Minutes > 0 && diff.Days == 0 && diff.Hours == 0) 
+                            {
+                                duration = $"{diff.Minutes} Minutes";
+                                <td>@duration</td>
+                            }
+
+                        }
+                        <td>@act.Creator.Name</td>
+                        <td>@act.Attendees.Count</td>
+                        @if(act.Creator.UserId == ViewBag.user.UserId)
+                        {
+                            <td><a href="/delete/@act.ActivityId">Delete</a></td>
+                        }
+                        else if (inActivity == false)
+                        {
+                            <td><a href="/join/@ViewBag.user.UserId/@act.ActivityId">Join Activity</a></td>
+                        }
+                        else if (inActivity == true)
+                        {
+                            <td><a href="/leave/@ViewBag.user.UserId/@act.ActivityId">Leave Activity</a></td>
+                        }
+                    </tr>                    
+                }
+                <!-- <tr>
+                    <td>act</td>
+                    <td>d & t</td>
+                    <td>dur</td>
+                    <td>event coord</td>
+                    <td>attendees</td>
+                    <td>join/leave/delete</td>
+                </tr> -->
+            </tbody>
+        </table>
+
+        <a href="/newActivity"><button class="btn btn-warning">New Activity</button></a>
+    </main>
+</div>

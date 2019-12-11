@@ -1,0 +1,48 @@
+<partial name="_NavPartial"/>
+<div class="container">
+    <main role="main" class="pb-3">
+        @{
+            bool inActivity = false;
+            foreach (var person in @ViewBag.activity.Attendees)
+            {
+                if(person.UserId == @ViewBag.user.UserId)
+                {
+                    inActivity = true;
+                }
+            }
+            
+            @if(ViewBag.activity.Creator.UserId == ViewBag.user.UserId && inActivity)
+            {
+                <a href="/delete/@ViewBag.activity.ActivityId"><button class="btn btn-warning float-right">Delete</button></a>
+            }
+            else if (inActivity == false)
+            {
+                <a href="/join/@ViewBag.user.UserId/@ViewBag.activity.ActivityId"><button class="btn btn-warning float-right">Join</button></a>
+            }
+            else if (inActivity == true)
+            {
+                <a href="/leave/@ViewBag.user.UserId/@ViewBag.activity.ActivityId"><button class="btn btn-warning float-right">Leave</button></a>
+            }
+        }
+        <h2>@ViewBag.activity.ActName</h2>
+        <div class="row">
+            <div class="col">
+                <h5 class="d-inline-block">Event Coordinator</h5>
+                <p class="d-inline-block">@ViewBag.activity.Creator.Name</p>
+                <h5>Description:</h5>
+                <p class="ml-3">@ViewBag.activity.Description</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h5>Participants</h5>
+                <ul>
+                    @foreach (var per in @ViewBag.activity.Attendees)
+                    {
+                        <li>@per.User.Name</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </main>
+</div>

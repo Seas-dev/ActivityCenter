@@ -1,0 +1,60 @@
+<partial name="_NavPartial"/>
+@model DojoActivity
+<div class="container">
+    <main role="main" class="pb-3">
+        <h3>Create an Activity</h3>
+        <form action="/createActivity" method="post">
+            <div class="row">
+                <div class="col">
+                    <div class="form-entry">
+                        <label asp-for="ActName"></label>
+                        <span asp-validation-for="ActName" class="text-danger"></span>
+                        <input asp-for="ActName" class="form-control">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-entry">
+                        <label asp-for="TimeStart"></label>
+                        <span asp-validation-for="TimeStart" class="text-danger"></span>
+                        <input asp-for="TimeStart" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-entry">
+                        <label asp-for="ActStart"></label>
+                        <span asp-validation-for="ActStart" class="text-danger"></span>
+                        <input asp-for="ActStart" class="form-control">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-entry">
+                        <label asp-for="DurationNum"></label>
+                        <span asp-validation-for="DurationNum" class="text-danger"></span>
+                        <input asp-for="DurationNum" class="form-control">
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="form-entry">
+                        <label asp-for="DurationLen"></label>
+                        <select asp-for="DurationLen" class="form-control">
+                            <option value="Hours">Hours</option>
+                            <option value="Minutes">Minutes</option>
+                            <option value="Days">Days</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label asp-for="Description"></label>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <textarea asp-for="Description" class="form-control"></textarea>
+                </div>
+            </div>
+            <input type="submit" value="Create Activity" class="btn btn-success mt-3">
+            
+        </form>
+    </main>
+</div>

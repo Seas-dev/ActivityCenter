@@ -1,0 +1,23 @@
+@model LogUser
+<form action="/CheckLog" method="post">
+    <div class="row">
+        <div class="col">
+            <h3>Login</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-entry">
+                <label asp-for="LogEmail"></label>
+                <span asp-validation-for="LogEmail" class="text-danger"></span>
+                <input asp-for="LogEmail" class="form-control">
+            </div>
+            <div class="form-entry">
+                <label asp-for="LogPassword"></label>
+                <span asp-validation-for="LogPassword" class="text-danger"></span>
+                <input asp-for="LogPassword" class="form-control">
+            </div>
+            <input type="submit" value="Login" class="btn btn-primary mt-3">
+        </div> 
+    </div>
+</form>

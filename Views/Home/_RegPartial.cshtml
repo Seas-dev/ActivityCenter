@@ -1,0 +1,33 @@
+@model User
+<form action="/CheckReg" method="post">
+    <div class="row">
+        <div class="col">
+            <h3>Register</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-entry">
+                <label asp-for="Name"></label>
+                <span asp-validation-for="Name" class="text-danger"></span>
+                <input asp-for="Name" class="form-control">
+            </div>
+            <div class="form-entry">
+                <label asp-for="Email"></label>
+                <span asp-validation-for="Email" class="text-danger"></span>
+                <input asp-for="Email" class="form-control">
+            </div>
+            <div class="form-entry">
+                <label asp-for="Password"></label>
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <input asp-for="Password" class="form-control">
+            </div>
+            <div class="form-entry">
+                <label asp-for="Confirm"></label>
+                <span asp-validation-for="Confirm" class="text-danger"></span>
+                <input asp-for="Confirm" class="form-control">
+            </div>
+            <input type="submit" value="Register" class="btn btn-primary mt-3">
+        </div> 
+    </div>
+</form>
